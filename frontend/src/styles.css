@@ -12,21 +12,22 @@ html {
   color-scheme: light;
 }
 
+html.dark {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 18% 0%, rgba(124, 58, 237, 0.09), transparent 28rem),
-    radial-gradient(circle at 80% 10%, rgba(34, 197, 94, 0.07), transparent 24rem),
+    radial-gradient(circle at 18% 0%, rgba(124, 58, 237, 0.07), transparent 28rem),
+    radial-gradient(circle at 80% 10%, rgba(34, 197, 94, 0.05), transparent 24rem),
     linear-gradient(180deg, #f8fafc 0%, #f1f5f9 46%, #eef2f7 100%);
   color: #0f172a;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   text-rendering: geometricPrecision;
-}
-
-.dark {
-  color-scheme: dark;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dark body {
@@ -49,19 +50,30 @@ textarea {
   color: #ffffff;
 }
 
+/* Light mode scrollbar */
 ::-webkit-scrollbar {
   height: 10px;
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 2px solid #f1f5f9;
+  border-radius: 999px;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+.dark ::-webkit-scrollbar-thumb {
   background: #1f2937;
   border: 2px solid #0b0f19;
-  border-radius: 999px;
 }
 
 .form-input {
@@ -76,12 +88,13 @@ textarea {
   @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/85 px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-white hover:text-violet-700 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-40 dark:border-slate-800 dark:bg-slate-900/65 dark:text-slate-200 dark:hover:border-violet-500/50 dark:hover:bg-slate-800 dark:hover:text-white;
 }
 
+/* Panel: light = white card, dark = dark card */
 .panel {
-  @apply rounded-2xl border border-slate-200/80 bg-white/[0.9] shadow-soft backdrop-blur-md dark:border-slate-800/90 dark:bg-slate-900/80;
+  @apply rounded-2xl border border-slate-200 bg-white shadow-[0_4px_20px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-slate-800/90 dark:bg-slate-900/80 dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)];
 }
 
 .card-hover {
-  @apply transition duration-150 hover:-translate-y-0.5 hover:border-violet-500/35 hover:shadow-[0_16px_40px_rgba(0,0,0,0.22)];
+  @apply transition duration-150 hover:-translate-y-0.5 hover:border-violet-400/40 hover:shadow-[0_12px_32px_rgba(124,58,237,0.12)] dark:hover:border-violet-500/35 dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.22)];
 }
 
 .page-shell {
@@ -89,7 +102,7 @@ textarea {
 }
 
 .eyebrow {
-  @apply text-xs font-black uppercase tracking-[0.2em] text-violet-300;
+  @apply text-xs font-black uppercase tracking-[0.2em] text-violet-600 dark:text-violet-300;
 }
 
 .skeleton {
@@ -97,9 +110,20 @@ textarea {
 }
 
 .glass-shell {
-  @apply border border-slate-200/80 bg-white/[0.86] shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur-md dark:border-white/10 dark:bg-white/[0.05] dark:shadow-[0_18px_55px_rgba(0,0,0,0.32)];
+  @apply border border-slate-200 bg-white/[0.86] shadow-[0_18px_50px_rgba(15,23,42,0.10)] backdrop-blur-md dark:border-white/10 dark:bg-white/[0.05] dark:shadow-[0_18px_55px_rgba(0,0,0,0.32)];
 }
 
 .section-title {
   @apply text-lg font-black tracking-tight text-slate-950 dark:text-white;
 }
+
+/* ─── Light-theme overrides for elements that use hardcoded dark values ──────── */
+
+/* Badge tones: ensure readable in light mode */
+.dark\:text-violet-200 {
+  /* already handled by Tailwind's dark: prefix */
+}
+
+/* Stat cards gradient backgrounds look good in both modes since they use opacity */
+
+/* Task column tones — light mode adjustments */
