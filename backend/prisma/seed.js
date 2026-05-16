@@ -13,18 +13,20 @@ async function main() {
   await prisma.project.deleteMany();
   await prisma.user.deleteMany();
 
-  const password = await bcrypt.hash('Password@123', 12);
+  const password = await bcrypt.hash('Nibha@123', 12);
+  const testPassword = await bcrypt.hash('Test@123', 12);
+  const riyaPassword = await bcrypt.hash('Riya@123', 12);
 
   const admin = await prisma.user.create({
-    data: { name: 'Avery Admin', email: 'admin@example.com', password, role: 'Admin' }
+    data: { name: 'Nibha_Kumari', email: 'nibhakumari@gmail.com', password, role: 'Admin' }
   });
 
-  const maya = await prisma.user.create({
-    data: { name: 'Maya Member', email: 'member@example.com', password, role: 'Member' }
+  const Test = await prisma.user.create({
+    data: { name: 'Test Member', email: 'testmember@gmail.com', password: testPassword, role: 'Member' }
   });
 
-  const jordan = await prisma.user.create({
-    data: { name: 'Jordan Lee', email: 'jordan@example.com', password, role: 'Member' }
+  const Riya = await prisma.user.create({
+    data: { name: 'Riya Kumari', email: 'riyas10@gmail.com', password: riyaPassword, role: 'Member' }
   });
 
   const launch = await prisma.project.create({
@@ -51,7 +53,7 @@ async function main() {
         status: 'InProgress',
         priority: 'High',
         dueDate: futureDate(3),
-        assignedTo: maya.id,
+        assignedTo: test.id,
         projectId: launch.id,
         createdBy: admin.id
       },
@@ -61,7 +63,7 @@ async function main() {
         status: 'Pending',
         priority: 'Medium',
         dueDate: futureDate(7),
-        assignedTo: jordan.id,
+        assignedTo: riya.id,
         projectId: launch.id,
         createdBy: admin.id
       },
@@ -71,7 +73,7 @@ async function main() {
         status: 'Completed',
         priority: 'Low',
         dueDate: futureDate(-2),
-        assignedTo: maya.id,
+        assignedTo: test.id,
         projectId: ops.id,
         createdBy: admin.id
       },
@@ -81,7 +83,7 @@ async function main() {
         status: 'Overdue',
         priority: 'High',
         dueDate: futureDate(-1),
-        assignedTo: jordan.id,
+        assignedTo: riya.id,
         projectId: ops.id,
         createdBy: admin.id
       }
