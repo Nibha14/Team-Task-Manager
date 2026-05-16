@@ -53,7 +53,7 @@ async function main() {
         status: 'InProgress',
         priority: 'High',
         dueDate: futureDate(3),
-        assignedTo: test.id,
+        assignedTo: Test.id,
         projectId: launch.id,
         createdBy: admin.id
       },
@@ -63,7 +63,7 @@ async function main() {
         status: 'Pending',
         priority: 'Medium',
         dueDate: futureDate(7),
-        assignedTo: riya.id,
+        assignedTo: Riya.id,
         projectId: launch.id,
         createdBy: admin.id
       },
@@ -73,7 +73,7 @@ async function main() {
         status: 'Completed',
         priority: 'Low',
         dueDate: futureDate(-2),
-        assignedTo: test.id,
+        assignedTo: Test.id,
         projectId: ops.id,
         createdBy: admin.id
       },
@@ -83,7 +83,7 @@ async function main() {
         status: 'Overdue',
         priority: 'High',
         dueDate: futureDate(-1),
-        assignedTo: riya.id,
+        assignedTo: Riya.id,
         projectId: ops.id,
         createdBy: admin.id
       }
